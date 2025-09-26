@@ -1,4 +1,4 @@
-# Uninstall and block ad and bloatware on Windows 11
+# Uninstall advertisements and bloatware on Windows 11
 
 _Gilbert Francois_
 
