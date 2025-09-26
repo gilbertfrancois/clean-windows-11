@@ -4,31 +4,27 @@ _Gilbert Francois_
 
 ## About
 
-``I paid for Windows — why is Microsoft stuffing it with ads and junk?''. Well, get rid
-of it with this script.
+_"I paid for Windows — why is Microsoft stuffing it with ads and junk?"_
 
-## Install Windows 11 on non-supported machines
-
-When installing from a bootable USB stick, press [shift][F10], start regedit and add
-the keys below:
-
-```regedit
-HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig
-   BypassTPMCheck        (DWORD) = 1
-   BypassSecureBootCheck (DWORD) = 1
-   BypassRAMCheck        (DWORD) = 1
-   BypassCPUCheck        (DWORD) = 1
-```
+Let's remove it, shall we?
 
 ## How to run the cleanup script
 
-- Save the script below as CleanWin11.ps1 (e.g., on Desktop).
-- Right–click Start → Windows Terminal (Admin) (or PowerShell as Admin).
-- Run:
+- Save the scripts below e.g., on Desktop.
+- Run the `clean_win11_admin.ps1` in an admin powershell and the `clean_win11_user.ps1` as logged in user.
+
+In Powershell as Administrator:
 
 ```sh
 Set-ExecutionPolicy Bypass -Scope Process -Force
-  "$env:USERPROFILE\Desktop\CleanWin11.ps1"
+  "$env:USERPROFILE\Desktop\clean_win11_admin.ps1"
+```
+
+In Powershell as user:
+
+```sh
+Set-ExecutionPolicy Bypass -Scope Process -Force
+  "$env:USERPROFILE\Desktop\clean_win11_user.ps1"
 ```
 
 - Reboot when it finishes
@@ -52,7 +48,7 @@ Install the latest PowerShell for new features and improvements! https://aka.ms/
 
 PS C:\WINDOWS\system32> cd C:\Users\grumpy\Desktop\
 PS C:\Users\grumpy\Desktop> Set-ExecutionPolicy Bypass -Scope Process -Force
-PS C:\Users\grumpy\Desktop> . "$env:USERPROFILE\Desktop\CleanWin11.ps1"
+PS C:\Users\grumpy\Desktop> . "$env:USERPROFILE\Desktop\clean_win11_admin.ps1"
 
 === Windows 11 minimalization starting... ===
 
@@ -85,14 +81,6 @@ Attempting OneDrive removal...
 OneDrive uninstalled.
 Applying system policies to block reinstallation and ads...
 Tuning per-user content/ads settings...
-New-Item : Attempted to perform an unauthorized operation.
-At C:\Users\grumpy\Desktop\CleanWin11.ps1:132 char:1
-+ New-Item -Path $expAdv -Force | Out-Null
-+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : PermissionDenied: (HKEY_CURRENT_US...plorer\Advanced:String) [New-Item], UnauthorizedAcc
-   essException
-    + FullyQualifiedErrorId : System.UnauthorizedAccessException,Microsoft.PowerShell.Commands.NewItemCommand
-
 Disabling CEIP/telemetry-related scheduled tasks (harmless to skip if missing)...
 Disabled task: \Microsoft\Windows\Customer Experience Improvement Program\Consolidator
 Disabled task: \Microsoft\Windows\Customer Experience Improvement Program\UsbCeip
@@ -103,27 +91,19 @@ Disabled task: \Microsoft\Windows\Feedback\Siuf\DmClient
 Disabled task: \Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload
 Disabled task: \Microsoft\Windows\Maps\MapsUpdateTask
 Disabled task: \Microsoft\Windows\Windows Error Reporting\QueueReporting
-New-Item : Attempted to perform an unauthorized operation.
-At C:\Users\grumpy\Desktop\CleanWin11.ps1:174 char:5
-+     New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\E ...
-+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : PermissionDenied: (HKEY_CURRENT_US...plorer\Advanced:String) [New-Item], UnauthorizedAcc
-   essException
-    + FullyQualifiedErrorId : System.UnauthorizedAccessException,Microsoft.PowerShell.Commands.NewItemCommand
-
-New-ItemProperty : Attempted to perform an unauthorized operation.
-At C:\Users\grumpy\Desktop\CleanWin11.ps1:175 char:5
-+     New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentV ...
-+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : PermissionDenied: (HKEY_CURRENT_US...plorer\Advanced:String) [New-ItemProperty], Unautho
-   rizedAccessException
-    + FullyQualifiedErrorId : System.UnauthorizedAccessException,Microsoft.PowerShell.Commands.NewItemPropertyCommand
-
-
 Completed. Some changes require sign out/reboot to fully apply.
 Recommendation: Reboot now. If any bundled apps reappear after a Feature Update,
-re-run this script or enforce via Group Policy (Pro):
-  gpedit.msc â†’ Computer Config â†’ Administrative Templates â†’ Windows Components â†’ Cloud Content â†’
-  â€¢ Turn off Microsoft consumer experiences = Enabled
-PS C:\Users\grumpy\Desktop>
+```
+
+## Extra: Install Windows 11 on non-supported machines
+
+When installing from a bootable USB stick, press [shift][F10], start regedit and add
+the keys below:
+
+```regedit
+HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig
+   BypassTPMCheck        (DWORD) = 1
+   BypassSecureBootCheck (DWORD) = 1
+   BypassRAMCheck        (DWORD) = 1
+   BypassCPUCheck        (DWORD) = 1
 ```
