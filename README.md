@@ -1,12 +1,6 @@
-# Uninstall advertisements and bloatware on Windows 11
+# Windows 11 Debloater: Remove Ads & Bloatware
 
-_Gilbert Francois_
-
-## About
-
-_"I paid for Windows — why is Microsoft stuffing it with ads and junk?"_
-
-Let's remove it, shall we?
+Tired of "recommendations," preinstalled apps, and other noise? These scripts disable promotions, remove sponsored apps, and turn off consumer experiences—for a clean, minimal Windows 11.
 
 ## How to run the cleanup script
 
